@@ -4,8 +4,7 @@
 <body> Bine ai venit la lab <button onclick="alertCookie()">Show cookies</button> 
 </body> 
 
-
-\n//Example1
+ //Example1
 
 <script>
 document.cookie = "name=oeschger; SameSite=None; Secure";
@@ -34,7 +33,7 @@ function clearOutputCookies() {
 </div>
 </body>
 
-\n Exemple2 
+//Exemple2 
 <script>
 document.cookie = "test1=Hello; SameSite=None; Secure";
 document.cookie = "test2=World; SameSite=None; Secure";
@@ -66,3 +65,34 @@ function clearOutputCookieValue() {
 
 </div>
  </body>
+<br>
+//Example 3
+<script>
+function doOnce() {
+  if (!document.cookie.split('; ').find(row => row.startsWith('doSomethingOnlyOnce'))) {
+    // Note that we are setting `SameSite=None;` in this example because the example
+    // needs to work cross-origin.
+    // It is more common not to set the `SameSite` attribute, which results in the default,
+    // and more secure, value of `SameSite=Lax;`
+    document.cookie = "doSomethingOnlyOnce=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure";
+
+    const output = document.getElementById('do-once')
+    output.textContent = '> Do something here!'
+  }
+}
+
+function clearOutputDoOnce() {
+  const output = document.getElementById('do-once')
+  output.textContent = ''
+}
+</script>
+<body>
+<button onclick="doOnce()">Only do something once</button>
+
+<button onclick="clearOutputDoOnce()">
+  Clear
+</button>
+</body>
+<div>
+  <code id="do-once"></code>
+</div>
